@@ -10,6 +10,15 @@ class UserInput{
     age: number
 }
 
+@InputType()
+class UserUpdateInput {
+  @Field(()=>String,{ nullable: true })
+  name?: string;
+
+  @Field(() => Int, { nullable: true })
+  age?: number;
+}
+
 
 @Resolver()
 export class UserResolver {
@@ -21,6 +30,24 @@ export class UserResolver {
   ) {
     await User.insert(values)
     return true;
+  }
+
+  @Mutation(()=>Boolean)
+  async updateUser(
+    @Arg("id", ()=>Int) id: number,
+    @Arg('updatedUser',()=>UserUpdateInput) updatedUser: UserUpdateInput
+  ){
+
+    await User.update({id}, updatedUser)
+    return true
+  }
+
+  @Mutation(()=>Boolean)
+  async deleteUser(
+    @Arg('id',()=> Int) id: number
+  ){
+    await User.delete(id)
+    return true
   }
 
   @Query(()=>[User])

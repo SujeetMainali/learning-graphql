@@ -5,6 +5,8 @@
 
 type Mutation {
   createUser(values: UserInput!): Boolean!
+  deleteUser(id: Int!): Boolean!
+  updateUser(id: Int!, updatedUser: UserUpdateInput!): Boolean!
 }
 
 type Query {
@@ -21,4 +23,9 @@ type User {
 input UserInput {
   age: Int!
   name: String!
+}
+
+input UserUpdateInput {
+  age: Int
+  name: String
 }
