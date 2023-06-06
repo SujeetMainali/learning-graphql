@@ -2,30 +2,20 @@ import "reflect-metadata";
 import { ApolloServer } from "apollo-server-express";
 import express from "express";
 import { buildSchema } from "type-graphql";
-import { DataSource } from "typeorm";
+import { AppDataSource } from "./config/database.config";
 import { HelloResolver } from "./resolvers/HelloResolvers";
+import { UserResolver } from "./resolvers/user.resolver";
 
 async function startServer() {
   // Create an Express app
   const app = express();
 
   // Connect to the PostgreSQL database using TypeORM
-  const AppDataSource = new DataSource({
-    type: "postgres",
-    host: "localhost",
-    port: 5432,
-    username: "sujeet",
-    password: "12345",
-    database: "graphqllearning",
-    entities: [
-      /* Specify your TypeORM entity classes here */
-    ],
-    synchronize: true, // This option creates the database tables automatically (for development only)
-  });
 
+AppDataSource.initialize()
   // Build the GraphQL schema
   const schema = await buildSchema({
-    resolvers: [HelloResolver],
+    resolvers: [HelloResolver, UserResolver],
     emitSchemaFile: true, // Optional: Generates a GraphQL schema file
   });
 
