@@ -3,8 +3,8 @@ import { ApolloServer } from "apollo-server-express";
 import express from "express";
 import { buildSchema } from "type-graphql";
 import { AppDataSource } from "./config/database.config";
-import { HelloResolver } from "./resolvers/HelloResolvers";
 import { UserResolver } from "./resolvers/user.resolver";
+// import { UserResolver } from "./resolvers/user.resolver";
 
 async function startServer() {
   // Create an Express app
@@ -15,7 +15,7 @@ async function startServer() {
 AppDataSource.initialize()
   // Build the GraphQL schema
   const schema = await buildSchema({
-    resolvers: [HelloResolver, UserResolver],
+    resolvers: [ UserResolver],
     emitSchemaFile: true, // Optional: Generates a GraphQL schema file
   });
 

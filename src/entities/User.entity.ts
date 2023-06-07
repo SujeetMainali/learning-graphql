@@ -1,23 +1,26 @@
 import { Field, Int, ObjectType } from "type-graphql";
-import { Entity, PrimaryGeneratedColumn, Column, BaseEntity } from "typeorm";
+import { Entity, PrimaryGeneratedColumn, Column, BaseEntity, OneToMany, JoinColumn } from "typeorm";
+import { UserAccountDetails } from "./userAccount.entity";
 
-@ObjectType()
+
 @Entity()
 export class User extends BaseEntity{
-    @Field(()=>Int)
-    @PrimaryGeneratedColumn()
-    id: number
+    
+    @PrimaryGeneratedColumn('uuid')
+    id: string
 
-    @Field()
+
     @Column()
     name: string
 
-    @Field(()=>Int)
     @Column()
     age: number
 
     // @Column()
     // address: string
+
+    @OneToMany(()=>UserAccountDetails, (userAccountDetails)=>userAccountDetails.user)
+    userAccountDetails: UserAccountDetails[]
 }
 
 

@@ -4,28 +4,35 @@
 # -----------------------------------------------
 
 type Mutation {
-  createUser(values: UserInput!): Boolean!
-  deleteUser(id: Int!): Boolean!
-  updateUser(id: Int!, updatedUser: UserUpdateInput!): Boolean!
+  createUser(data: UserInput!): UserSchema!
 }
 
 type Query {
-  hello: String!
-  users: [User!]!
+  """get all users"""
+  getAllUsers(args: UserInput!): [UserSchema!]!
+  getUserById(id: String!): UserSchema!
 }
 
-type User {
-  age: Int!
-  id: Int!
-  name: String!
+type UserAccountDetailsSchema {
+  accountNumber: String
+  balance: Int
+  isActive: Boolean
+}
+
+input UserAccuntDetailsInput {
+  accountNumber: String!
+  balance: Int!
+  isActive: Boolean!
 }
 
 input UserInput {
   age: Int!
   name: String!
+  userAccountDetails: [UserAccuntDetailsInput!]
 }
 
-input UserUpdateInput {
+type UserSchema {
   age: Int
   name: String
+  userAccountDetails: UserAccountDetailsSchema
 }

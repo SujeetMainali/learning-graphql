@@ -1,9 +1,15 @@
-import { Resolver, Query } from "type-graphql";
+@Mutation(() => Boolean)
+async createUser(@Arg("values", () => UserInput) values: UserInput) {
+  const { userAccount, ...userData } = values;
 
-@Resolver()
-export class HelloResolver {
-  @Query(() => String)
-  async hello() {
-    return "Hello, World!";
-  }
+  const user = await User.create(userData).save();
+
+  const userAccountData = {
+    ...userAccount,
+    user: user,
+  };
+
+  await UserAccount.create(userAccountData).save();
+
+  return true;
 }
