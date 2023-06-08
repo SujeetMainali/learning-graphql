@@ -20,6 +20,6 @@ export class UserSchema {
   @Field(() => Float, { nullable: true })
   age: number;
 
-  @Field(() => UserAccountDetailsSchema, { nullable: true })
-  userAccountDetails: UserAccountDetailsSchema;
+  @Field(() => [UserAccountDetailsSchema], { nullable: true })
+  userAccountDetails: UserAccountDetailsSchema[];
 }

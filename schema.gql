@@ -8,6 +8,7 @@ type Mutation {
 }
 
 type Query {
+  getUserById(id: String!): [UserSchema!]!
   users: [UserSchema!]!
 }
 
@@ -32,5 +33,5 @@ input UserInput {
 type UserSchema {
   age: Float
   name: String
-  userAccountDetails: UserAccountDetailsSchema
+  userAccountDetails: [UserAccountDetailsSchema!]
 }

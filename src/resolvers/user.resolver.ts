@@ -31,8 +31,9 @@ export class UserResolver {
     return await userService.get();
   }
 
-  // @Query(() => [UserSchema])
-  // async getUserById(@Arg("id") id: string) {
-  //   return await userService.getById(id);
-  // }
+  @Query(() => [UserSchema])
+  async getUserById(@Arg("id") id: string) {
+    const user =  await userService.getById(id);
+    return [user]
+  }
 }

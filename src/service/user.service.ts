@@ -20,27 +20,23 @@ class UserServce {
 
   async get() {
     let data = await this.userRepository.find({
+      relations: ["userAccountDetails"],
+    });
+    console.log(data);
+    return data;
+  }
+
+  async getById(id: string) {
+    const user = this.userRepository.findOne({
+      where: {
+        id,
+      },
       relations: {
         userAccountDetails: true,
       },
     });
-    data.forEach(vak=>{
-      console.log(vak.userAccountDetails)
-    })
-    return data
+    return user;
   }
-
-  // async getById(id: string) {
-  //   const user = this.userRepository.findOne({
-  //     where: {
-  //       id,
-  //     },
-  //     relations: {
-  //       userAccountDetails: true,
-  //     },
-  //   });
-  //   return user;
-  // }
 }
 
 export default new UserServce();
