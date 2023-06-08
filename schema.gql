@@ -8,14 +8,12 @@ type Mutation {
 }
 
 type Query {
-  """get all users"""
-  getAllUsers(args: UserInput!): [UserSchema!]!
-  getUserById(id: String!): UserSchema!
+  users: [UserSchema!]!
 }
 
 type UserAccountDetailsSchema {
   accountNumber: String
-  balance: Int
+  balance: Float
   isActive: Boolean
 }
 
@@ -32,7 +30,7 @@ input UserInput {
 }
 
 type UserSchema {
-  age: Int
+  age: Float
   name: String
   userAccountDetails: UserAccountDetailsSchema
 }

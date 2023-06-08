@@ -1,14 +1,14 @@
-import { Field, Int, ObjectType } from "type-graphql";
+import { Field, Float, Int, ObjectType } from "type-graphql";
 
 @ObjectType()
 export class UserAccountDetailsSchema {
   @Field(() => String, { nullable: true })
   accountNumber: string;
 
-  @Field(() => Boolean,{nullable:true})
+  @Field(() => Boolean, { nullable: true })
   isActive: boolean;
 
-  @Field(() => Int,{nullable:true})
+  @Field(() => Float, { nullable: true })
   balance: number;
 }
 
@@ -17,9 +17,9 @@ export class UserSchema {
   @Field(() => String, { nullable: true })
   name: string;
 
-  @Field(() => Int, { nullable: true })
+  @Field(() => Float, { nullable: true })
   age: number;
 
   @Field(() => UserAccountDetailsSchema, { nullable: true })
-  userAccountDetails: UserAccountDetailsSchema[];
+  userAccountDetails: UserAccountDetailsSchema;
 }

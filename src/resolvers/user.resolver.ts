@@ -26,13 +26,13 @@ export class UserResolver {
     }
   }
 
-  @Query(() => [UserSchema], { description: "get all users" })
-  async getAllUsers(@Arg("args") args: UserInput) {
+  @Query(() => [UserSchema])
+  async users() {
     return await userService.get();
   }
 
-  @Query(() => UserSchema)
-  async getUserById(@Arg("id") id: string){
-    return await userService.getById(id);
-  }
+  // @Query(() => [UserSchema])
+  // async getUserById(@Arg("id") id: string) {
+  //   return await userService.getById(id);
+  // }
 }
